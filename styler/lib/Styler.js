@@ -81,7 +81,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
         this.initialConfig = Ext.apply({}, config);
         Ext.apply(this, config);
         
-        var baseLayers = [new OpenLayers.Layer("None", {isBaseLayer: true})];
+        var baseLayers = [];
         this.baseLayers = baseLayers.concat(config.baseLayers || []);
         
         Styler.superclass.constructor.call(this);
