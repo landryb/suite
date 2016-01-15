@@ -74,9 +74,11 @@ Styler.SLDManager = OpenLayers.Class({
     
     getUrl: function(layer, styleName) {
         var url;
+        var namespace = OpenLayers.Util.getParameters(window.location.href).namespace;
         if(layer instanceof OpenLayers.Layer.WMS) {
             url = layer.url.split("?")[0].replace(
-                "/wms", "/rest/styles/"+styleName+".sld");
+                "/" + namespace + "/wms",
+                "/rest/workspaces/" + namespace + "/styles/" + styleName + ".sld");
         }
         //TODO handle other layer types
         return url;
