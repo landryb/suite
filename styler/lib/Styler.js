@@ -117,9 +117,11 @@ var Styler = Ext.extend(Ext.util.Observable, {
     describeLayers: function(callback) {
         var config;
         var candidates = [];
+        var layername = OpenLayers.Util.getParameters(window.location.href).layer;
         for (var i=0, ii=this.wmsLayerList.length; i<ii; ++i) {
             config = this.wmsLayerList[i];
-            if (config.styles && config.styles.length) {
+            if (config.styles && config.styles.length &&
+                config.name == layername.substring(1 + layername.indexOf(':'))) {
                 candidates.push(config.name);
             }
         }
