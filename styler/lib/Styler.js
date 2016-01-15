@@ -354,8 +354,10 @@ var Styler = Ext.extend(Ext.util.Observable, {
                     new OpenLayers.Projection("EPSG:900913")
                 );
 
+                var namespace = OpenLayers.Util.upperCaseObject(
+                    OpenLayers.Util.getParameters(window.location.href)).NAMESPACE;
                 layers.push(new OpenLayers.Layer.WMS(
-                    config.title, "/geoserver/wms", {
+                    config.title, this.gsBaseUrl + "/" + namespace + "/wms", {
                         layers: config.name,
                         styles: config.styles[0].name,
                         transparent: true,
