@@ -362,7 +362,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
                 layers.push(new OpenLayers.Layer.WMS(
                     config.title, this.gsBaseUrl + "/" + namespace + "/wms", {
                         layers: config.name,
-                        styles: config.styles[0].name,
+                        styles: config.styles[0].name.substr(1 + config.styles[0].name.indexOf(':')),
                         transparent: true,
                         format: "image/png"
                     }, {
