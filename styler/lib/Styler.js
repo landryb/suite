@@ -16,6 +16,7 @@
 var Styler = Ext.extend(Ext.util.Observable, {
     
     map: null,
+    gsBaseUrl: '/wxs',
     wmsLayerList: null,
     layerList: null,
     currentLayer: null,
@@ -129,7 +130,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
             LAYERS: candidates
         };
         var store = new GeoExt.data.WMSDescribeLayerStore({
-            url: "/geoserver/wms?" + OpenLayers.Util.getParameterString(params),
+            url: this.gsBaseUrl + "/wms?" + OpenLayers.Util.getParameterString(params),
             autoLoad: true,
             listeners: {
                 load: function() {
@@ -158,7 +159,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
             OpenLayers.Util.getParameters(window.location.href)
         ).NAMESPACE;
         Ext.Ajax.request({
-            url: "/geoserver/ows",
+            url: this.gsBaseUrl + "/ows",
             method: "GET",
             disableCaching: false,
             success: this.parseWMSCapabilities,
@@ -551,7 +552,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
         // and require that setCurrentLayer be called again in initEditor
         if(this.getFeatureControl.active) {
             this.getFeatureControl.protocol = OpenLayers.Protocol.WFS.fromWMSLayer(layer, {
-                url: "/geoserver/ows",
+                url: this.gsBaseUrl + "/ows",
                 geometryName: this.schemaManager.getGeometryName(layer)
             });
         }
@@ -860,7 +861,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
                     data.mapZoom = this.map.getZoom();
                 }).createDelegate(this),
                 attributes: new GeoExt.data.AttributeStore({
-                    url: "/geoserver/wfs?",
+                    url: this.gsBaseUrl + "/wfs?",
                     baseParams: {
                         version: "1.1.1",
                         request: "DescribeFeatureType",
@@ -936,7 +937,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
 
     getOneFeature: function(layer, callback) {
         Ext.Ajax.request({
-            url: "/geoserver/wfs?",
+            url: this.gsBaseUrl + "/wfs?",
             method: "GET",
             disableCaching: false,
             params: {
