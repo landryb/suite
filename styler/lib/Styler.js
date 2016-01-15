@@ -242,10 +242,10 @@ var Styler = Ext.extend(Ext.util.Observable, {
 
         this.legendContainer = new Ext.Panel({
             title: "Legend",
-            height: 200,
+            height: 400,
             autoScroll: true,
             items: [{html: ""}],
-            bbar: [{
+            tbar: [{
                 text: "Add new",
                 iconCls: "add",
                 disabled: true,
@@ -296,7 +296,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
         this.layersContainer = new Ext.Panel({
             autoScroll: true,
             title: "Layers",
-            anchor: "100%, -200"
+            anchor: "100%, -400"
         });
 
         var westPanel = new Ext.Panel({
@@ -975,14 +975,14 @@ var Styler = Ext.extend(Ext.util.Observable, {
      * Method: getAddButton
      */
     getAddButton: function() {
-        return this.legendContainer.getBottomToolbar().items.get(0);
+        return this.legendContainer.getTopToolbar().items.get(0);
     },
     
     /**
      * Method: getDeleteButton
      */
     getDeleteButton: function() {
-        return this.legendContainer.getBottomToolbar().items.get(1);
+        return this.legendContainer.getTopToolbar().items.get(1);
     }
 });
 
