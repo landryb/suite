@@ -131,8 +131,9 @@ var Styler = Ext.extend(Ext.util.Observable, {
             REQUEST: "DescribeLayer",
             LAYERS: candidates
         };
+        var namespace = OpenLayers.Util.getParameters(window.location.href).namespace;
         var store = new GeoExt.data.WMSDescribeLayerStore({
-            url: this.gsBaseUrl + "/wms?" + OpenLayers.Util.getParameterString(params),
+            url: this.gsBaseUrl + "/" + namespace + "/wms?" + OpenLayers.Util.getParameterString(params),
             autoLoad: true,
             listeners: {
                 load: function() {
@@ -161,18 +162,18 @@ var Styler = Ext.extend(Ext.util.Observable, {
             OpenLayers.Util.getParameters(window.location.href)
         ).NAMESPACE;
         Ext.Ajax.request({
-            url: this.gsBaseUrl + "/ows",
+            url: this.gsBaseUrl + "/" + namespace + "/ows",
             method: "GET",
             disableCaching: false,
             success: this.parseWMSCapabilities,
             failure: function() {
                 throw("Unable to read capabilities from WMS");
             },
-            params: Ext.apply(namespace ? {NAMESPACE: namespace} : {}, {
+            params: {
                 VERSION: "1.1.1",
                 REQUEST: "GetCapabilities",
                 SERVICE: "WMS"
-            }),
+            },
             options: {callback: callback},
             scope: this
         });
