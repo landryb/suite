@@ -217,7 +217,7 @@ var Styler = Ext.extend(Ext.util.Observable, {
             map: {
                 allOverlays: false,
                 controls: [
-                    new OpenLayers.Control.Navigation({zoomWheelEnabled: false}),
+                    new OpenLayers.Control.Navigation({zoomWheelEnabled: true}),
                     new OpenLayers.Control.PanPanel(),
                     new OpenLayers.Control.ZoomPanel(),
                     this.getFeatureControl
